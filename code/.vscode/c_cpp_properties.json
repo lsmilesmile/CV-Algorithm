@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "name": "GCC",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "E:\\cpplibrary\\opencv\\mingwbuild\\install\\include",
+                "E:\\cpplibrary\\opencv\\mingwbuild\\install\\include\\opencv",
+                "E:\\cpplibrary\\opencv\\mingwbuild\\install\\include\\opencv2"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "windowsSdkVersion": "10.0.17763.0",
+            "compilerPath": "E:/MinGW64/bin/g++.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++11",
+            "intelliSenseMode": "windows-gcc-x64"
+        }
+    ],
+    "version": 4
+}
