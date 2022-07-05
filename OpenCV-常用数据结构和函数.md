@@ -128,3 +128,53 @@ int main()
   Rect rectShift = rect + point;
   Rect rectScale = rect + size;
   ```
+  
+- **cvtColor()函数**
+
+  ```c++
+  
+  
+  #include <iostream>
+  #include <opencv2/opencv.hpp>
+  #include <opencv2/imgproc/imgproc_c.h>
+  
+  
+  #ifdef _DEBUG
+  #pragma comment(lib, "opencv_world3410d.lib")
+  #else
+  #pragma comment(lib, "opencv_world3410.lib")
+  #endif // _DEBUG
+  
+  
+  int main()
+  {
+  	std::cout << "start..." << std::endl;
+  
+  	cv::Mat src = cv::imread("test.jpg");
+  	if (src.empty()) {
+  		std::cout << "error\n";
+  		return -1;
+  	}
+  	cv::cvtColor(src, src, CV_BGR2GRAY);
+  	cv::imshow("src", src);
+  	cv::waitKey();
+  	
+  	std::cout << "end." << std::endl;
+  	return 0;
+  }
+  
+  ```
+
+- **防止内存溢出的函数**
+
+  alignPtr、alignSize、allocate、deallocate、faseMalloc、fastFree
+
+  
+
+- **<math.h>常用函数**
+
+  fastAtan2、cubeRoot、cvCeil、cvFloor、cvRound、getTextSize、cvInitFont、putText、
+
+  circle、clipLine、ellipse、ellipse2Poly、line、rectangle、polylines、
+
+  fillConvecPoly、fillPoly
