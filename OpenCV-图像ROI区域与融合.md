@@ -33,6 +33,8 @@
 ```c++
 
 
+
+
 #include <iostream>
 #include <opencv2/opencv.hpp>
 #include <opencv2/imgproc/imgproc_c.h>
@@ -58,9 +60,14 @@ int main()
 	if (src.empty() || tx.empty())
 		return -1;
 	cv::Mat roi = src(cv::Rect(20, 20, tx.cols, tx.rows));
-	cv::Mat mask = cv::imread("tx.jpg", 0);
+	cv::Mat mask(tx.rows, tx.cols, CV_8UC1, cv::Scalar(255));
+	cv::rectangle(mask, cv::Rect(10, 10, 30, 30), cv::Scalar(0), -1);
 	tx.copyTo(roi, mask);
 	cv::imshow("src", src);
+	cv::waitKey();
+
+	tx.copyTo(roi);
+	cv::imshow("src2", src);
 	cv::waitKey();
 	
 
@@ -68,6 +75,7 @@ int main()
 	std::cout << "end." << std::endl;
 	return 0;
 }
+
 
 ```
 
