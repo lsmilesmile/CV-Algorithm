@@ -21,6 +21,10 @@ c is contrast, value range is [-1,1]
 
 
 
+![](./imgs/11.jpg)
+
+
+
 ###### code
 
 ```c++
