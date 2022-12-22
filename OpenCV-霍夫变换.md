@@ -63,3 +63,58 @@ int main()
 }
 ```
 
+
+
+###### 累计霍夫概率变换
+
+```c++
+void HoughLinesP(InputArray image, OutputArray lines, double rho,
+                double theta, int threshold, double minLineLength=0, double maxLineGap=0);
+```
+
+- image - 源图像，8位单通道二进制图像。
+- lines - 经过调用HoughLinesP函数后存储了检测到的线条的输出矢量，每一条线由具有4哥矢量（x_1, y_1, x_2, y_2）表示，其中（x_1, y_1）和（x_2, y_2）是每个检测到的线段的结束点。
+- rho - 以像素为单位的距离精度。或直线搜索时的进步尺寸的单位半径。
+- theta - 以弧度位单位的角度精度。或直线搜索时的进步尺寸的单位角度。
+- threshold - 累加平面的阈值参数，即识别某部分为图中的一条直线时它在累加平面中必须达到的值。大于阈值threshold的线段才可以被检测通过并返回到结果中。
+- minLineLength - 默认值0，表示最低线段的长度，比这个设定参数短的线段就不能被显现出来。
+- maxLineGap - 默认值0，允许将同一行点与点之间连接起来的最大距离。
+
+
+
+**code**
+
+```c++
+#include<opencv2/opencv.hpp>
+#include <iostream>
+
+using namespace std;
+using namespace cv;
+
+
+int main()
+{
+	cv::Mat srcImage = cv::imread("./imgs/1.jpg");
+	cv::Mat midImage, dstImage;
+	
+	cv::Canny(srcImage, midImage, 50, 200, 3);
+	cv::imshow("midImage", midImage);
+
+	cv::cvtColor(midImage, dstImage, cv::COLOR_GRAY2BGR);
+
+	std::vector<cv::Vec4i> lines;
+	cv::HoughLinesP(midImage, lines, 1, CV_PI / 180, 80, 50, 10);
+
+	for (size_t i = 0; i < lines.size(); i++) {
+		cv::Vec4i l = lines[i];
+		cv::line(dstImage, cv::Point(l[0], l[1]), cv::Point(l[2], l[3]),
+			cv::Scalar(186, 88, 255), 1, cv::LINE_AA);
+	}
+
+	cv::imshow("dstImage", dstImage);
+	
+	cv::waitKey();
+	return 0;
+}
+```
+
