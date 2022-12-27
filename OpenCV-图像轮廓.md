@@ -64,3 +64,49 @@ void drawContours(InputOutputArray image, InputArrayOfArrays contours,
 - hierarchy - 可选的层次结构信息，默认为noArray()。
 - maxLevel - 用于绘制轮廓的最大等级，默认值INT_MAX。
 - offset - 可选的轮廓偏移参数，用指定的偏移量offset=(dx, dy)偏移量需要绘制的轮廓，默认值Point()。
+
+
+
+###### code
+
+```c++
+#include <opencv2\opencv.hpp>
+#include <opencv2\highgui\highgui.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+
+
+int main() {
+	cv::Mat srcImage = cv::imread("./imgs/1.jpg", 0);
+	cv::imshow("src", srcImage);
+
+
+	cv::Mat dstImage = cv::Mat::zeros(srcImage.rows, srcImage.cols, CV_8UC3);
+
+	srcImage = srcImage > 150;
+	cv::imshow("srcImage", srcImage);
+
+	std::vector<std::vector<cv::Point>> contours;
+	std::vector<cv::Vec4i> hierarchy;
+
+	cv::findContours(srcImage, contours, hierarchy, cv::RETR_CCOMP, \
+		cv::CHAIN_APPROX_SIMPLE);
+	int index = 0;
+	for (; index >= 0; index = hierarchy[index][0])
+	{
+		cv::Scalar color(rand() & 255, rand() & 255, rand() & 255);
+		cv::drawContours(dstImage, contours, index, color, cv::FILLED,
+			8, hierarchy);
+	}
+	cv::imshow("dst", dstImage);
+
+	
+
+	cv::waitKey();
+
+
+
+	return 0;
+
+}
+```
+
